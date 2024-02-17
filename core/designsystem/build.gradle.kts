@@ -49,6 +49,8 @@ dependencies {
     api(libs.compose.material.icons)
     api(libs.compose.tooling.preview)
 
+    api(libs.system.ui.controller)
+
     debugApi(libs.compose.tooling)
     debugApi(libs.compose.ui.test.manifest)
 
