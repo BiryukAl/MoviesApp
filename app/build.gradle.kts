@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":feature:details:impl"))
     implementation(project(":feature:favorite:impl"))
     implementation(project(":feature:popular:impl"))
+    implementation(project(":feature:search:impl"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

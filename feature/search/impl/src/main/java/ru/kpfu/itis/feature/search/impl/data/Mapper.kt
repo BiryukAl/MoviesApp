@@ -1,7 +1,6 @@
-package ru.kpfu.itis.feature.search.impl
+package ru.kpfu.itis.feature.search.impl.data
 
 import ru.kpfu.itis.feature.search.api.Film
-import ru.kpfu.itis.feature.search.impl.data.SearchResponse
 
 class Mapper {
 

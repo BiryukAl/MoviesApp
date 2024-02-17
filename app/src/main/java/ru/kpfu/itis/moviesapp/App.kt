@@ -9,6 +9,7 @@ import ru.kpfu.itis.core.network.networkModule
 import ru.kpfu.itis.feature.details.impl.detailModule
 import ru.kpfu.itis.feature.favorite.impl.favoriteModule
 import ru.kpfu.itis.feature.popular.impl.popularModule
+import ru.kpfu.itis.feature.search.impl.searchModule
 import timber.log.Timber
 
 class App: Application() {
@@ -27,6 +28,7 @@ class App: Application() {
                 detailModule,
                 favoriteModule,
                 popularModule,
+                searchModule
             )
         }
     }
