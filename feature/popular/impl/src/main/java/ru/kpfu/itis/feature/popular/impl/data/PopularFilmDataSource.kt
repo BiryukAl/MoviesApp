@@ -23,7 +23,7 @@ interface PopularFilmDataSource{
 
     }
 
-    class Test(): PopularFilmDataSource {
+    class Test() : PopularFilmDataSource {
         override suspend fun getPopularFilms(page: Int): Result<FilmsResponse> {
             TODO("Not yet implemented")
         }
