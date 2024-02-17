@@ -4,8 +4,7 @@ import io.realm.kotlin.ext.realmSetOf
 import ru.kpfu.itis.core.db.realm.Film
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilm
 
-class Mappers {
-
+internal class Mappers {
     fun entityToModel(entity: Film?): Result<FavoriteFilm> = kotlin.runCatching {
         if (entity == null) return Result.failure(NullPointerException())
         with(entity) {

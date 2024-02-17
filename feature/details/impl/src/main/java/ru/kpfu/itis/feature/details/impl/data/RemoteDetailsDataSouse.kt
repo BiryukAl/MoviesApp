@@ -5,17 +5,17 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 
 
-interface RemoteDetailsDataSouse {
+internal interface RemoteDetailsDataSouse {
     suspend fun getFilmById(kinopoiskId: Int): Result<FilmResponse>
 
     class Base(
         private val client: HttpClient
-    ): RemoteDetailsDataSouse {
+    ) : RemoteDetailsDataSouse {
         override suspend fun getFilmById(kinopoiskId: Int): Result<FilmResponse> =
             client.get("films/$kinopoiskId").body()
     }
 
-    class Test(): RemoteDetailsDataSouse {
+    class Test() : RemoteDetailsDataSouse {
         override suspend fun getFilmById(kinopoiskId: Int): Result<FilmResponse> {
             TODO("Not yet implemented")
         }

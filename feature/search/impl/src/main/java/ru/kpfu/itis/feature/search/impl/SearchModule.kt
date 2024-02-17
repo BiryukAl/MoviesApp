@@ -8,7 +8,7 @@ import ru.kpfu.itis.feature.search.impl.data.SearchFilmDataSource
 import ru.kpfu.itis.feature.search.impl.data.SearchFilmRepositoryImpl
 import ru.kpfu.itis.feature.search.impl.useCase.GetFilmsByQueryUseCaseImpl
 
-val searchModule = module  {
+val searchModule = module {
     //Data
     factory<SearchFilmDataSource> {
         SearchFilmDataSource.Base(client = get())

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.map
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilm
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilmRepository
 
-class FavoriteFilmRepositoryImpl(
+internal class FavoriteFilmRepositoryImpl(
     private val local: LocalFavoriteDataSource,
     private val remote: RemoteFilmDataSource,
     private val mappers: Mappers,

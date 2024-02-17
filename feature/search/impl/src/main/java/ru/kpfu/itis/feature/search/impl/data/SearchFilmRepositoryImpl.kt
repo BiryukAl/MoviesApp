@@ -10,9 +10,9 @@ internal class SearchFilmRepositoryImpl(
 
     override suspend fun getFilmByQuery(query: String): Result<List<Film>> {
         return network.getFilmByQuery(query).map { response: SearchResponse ->
-                response.films.orEmpty().filterNotNull().mapNotNull { film ->
-                    mapper.responseToModel(film).getOrNull()
-                }
+            response.films.orEmpty().filterNotNull().mapNotNull { film ->
+                mapper.responseToModel(film).getOrNull()
             }
+        }
     }
 }

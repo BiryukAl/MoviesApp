@@ -1,9 +1,8 @@
 package ru.kpfu.itis.feature.popular.impl.data
 
 import ru.kpfu.itis.feature.popular.api.Film
-import ru.kpfu.itis.feature.popular.impl.data.response.FilmsResponse
 
-class Mappers {
+internal class Mappers {
     private fun responseToModel(response: FilmsResponse.Film, isFavorite: Boolean): Result<Film> =
         kotlin.runCatching {
             Film(

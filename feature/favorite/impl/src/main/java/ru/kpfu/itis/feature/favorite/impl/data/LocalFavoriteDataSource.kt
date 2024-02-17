@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 import ru.kpfu.itis.core.db.realm.Film
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilm
 
-interface LocalFavoriteDataSource{
+internal interface LocalFavoriteDataSource {
 
     fun getAllFavorite(): Flow<Result<List<Film>>>
     fun getById(kinopoiskId: Int): Result<Film>
@@ -19,7 +19,7 @@ interface LocalFavoriteDataSource{
     class Base(
         private val realm: Realm,
         private val mapper: Mappers,
-    ):LocalFavoriteDataSource {
+    ) : LocalFavoriteDataSource {
 
         override fun getAllFavorite(): Flow<Result<List<Film>>> {
             return realm.query<Film>().asFlow()

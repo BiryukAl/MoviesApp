@@ -1,11 +1,11 @@
-package ru.kpfu.itis.feature.popular.impl.data.response
+package ru.kpfu.itis.feature.popular.impl.data
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FilmsResponse(
+internal data class FilmsResponse(
     @SerialName("items")
     val films: List<Film?>?,
     @SerialName("total")

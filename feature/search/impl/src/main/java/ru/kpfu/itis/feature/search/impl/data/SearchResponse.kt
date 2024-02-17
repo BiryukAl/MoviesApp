@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SearchResponse(
+internal data class SearchResponse(
     @SerialName("films")
     val films: List<Film?>?,
     @SerialName("keyword")

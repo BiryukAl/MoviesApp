@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class FilmResponse(
+internal data class FilmResponse(
     @SerialName("completed")
     val completed: Boolean?,
     @SerialName("countries")

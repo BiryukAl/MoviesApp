@@ -2,7 +2,7 @@ package ru.kpfu.itis.feature.search.impl.data
 
 import ru.kpfu.itis.feature.search.api.Film
 
-class Mapper {
+internal class Mapper {
 
     fun responseToModel(response: SearchResponse.Film): Result<Film> = kotlin.runCatching {
         Film(
@@ -13,5 +13,4 @@ class Mapper {
             year = response.year
         )
     }
-
 }
