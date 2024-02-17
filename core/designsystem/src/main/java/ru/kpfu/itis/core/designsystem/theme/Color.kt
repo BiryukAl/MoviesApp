@@ -1,4 +1,4 @@
-package ru.kpfu.itis.moviesapp.ui.theme
+package ru.kpfu.itis.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
