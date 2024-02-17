@@ -1,4 +1,4 @@
-package com.example.kinopoisk.core.widget
+package ru.kpfu.itis.core.widget
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -7,9 +7,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import ru.kpfu.itis.core.designsystem.icon.KinopoiskIcons
-import com.example.kinopoisk.core.designsystem.theme.KinopoiskTheme
-import ru.kpfu.itis.core.widget.KinopoiskIconButton
+import ru.kpfu.itis.core.designsystem.MoviesAppTheme
+import ru.kpfu.itis.core.designsystem.icon.MoviesAppIcons
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,19 +23,19 @@ fun KinopoiskTopBar(
     title = {
         Text(
             text = title,
-            style = KinopoiskTheme.kinopoiskTypography.screenHeading,
-            color = KinopoiskTheme.kinopoiskColor.primaryText
+            style =  MoviesAppTheme.type.screenHeading,
+            color = MoviesAppTheme.color.primaryText
         )
     },
     scrollBehavior = scrollBehavior,
     actions = {
         KinopoiskIconButton(
-            icon = KinopoiskIcons.Search,
+            icon =  MoviesAppIcons.Search,
             action = onClick
         )
     },
     colors = TopAppBarDefaults.topAppBarColors(
-        containerColor = KinopoiskTheme.kinopoiskColor.background,
-        scrolledContainerColor = KinopoiskTheme.kinopoiskColor.background
+        containerColor =  MoviesAppTheme.color.background,
+        scrolledContainerColor = MoviesAppTheme.color.background
     )
 )
