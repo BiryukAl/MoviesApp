@@ -43,4 +43,8 @@ dependencies {
 
     implementation(libs.corutines.core)
 
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.compose.ui.test.junit4)
+
 }
