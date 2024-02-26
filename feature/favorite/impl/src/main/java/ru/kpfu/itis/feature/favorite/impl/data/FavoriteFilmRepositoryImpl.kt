@@ -26,16 +26,17 @@ internal class FavoriteFilmRepositoryImpl(
 
     override suspend fun addFilm(id: Int): Flow<Unit> = flow {
         remote.getFilmById(id)
-            .map { remoteFilm ->
-                mappers.responseToModel(remoteFilm).map {
-                    if (local.addFilm(it).isSuccess) emit(Unit)
+            .map { filmResponse ->
+                mappers.responseToModel(filmResponse).map {
+                    local.addFilm(it).fold(
+                        onSuccess = { emit(Unit) },
+                        onFailure = { ex -> throw ex }
+                    )
                 }.getOrThrow()
             }
     }
 
     override suspend fun delete(id: Int): Result<Unit> {
-        return getById(id).map {
-            local.delete(it)
-        }
+        return local.delete(id)
     }
 }

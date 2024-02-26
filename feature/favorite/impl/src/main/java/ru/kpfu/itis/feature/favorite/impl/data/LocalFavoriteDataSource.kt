@@ -6,6 +6,7 @@ import io.realm.kotlin.exceptions.RealmException
 import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import ru.kpfu.itis.core.db.exception.NotFoundException
 import ru.kpfu.itis.core.db.realm.Film
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilm
 
@@ -14,7 +15,7 @@ internal interface LocalFavoriteDataSource {
     fun getAllFavorite(): Flow<Result<List<Film>>>
     fun getById(kinopoiskId: Int): Result<Film>
     suspend fun addFilm(film: FavoriteFilm): Result<Film>
-    suspend fun delete(film: FavoriteFilm): Result<Unit>
+    suspend fun delete(kinopoiskId: Int): Result<Unit>
 
     class Base(
         private val realm: Realm,
@@ -57,22 +58,29 @@ internal interface LocalFavoriteDataSource {
                         updatePolicy = UpdatePolicy.ALL
                     )
                 }
-
                 Result.success(outFilm)
             } catch (ex: Exception) {
                 Result.failure(ex)
             }
         }
 
-        override suspend fun delete(film: FavoriteFilm): Result<Unit> {
+        override suspend fun delete(kinopoiskId: Int): Result<Unit> {
             return try {
-                val inFilm = mapper.modelToEntity(film).getOrThrow()
+                val film = realm.query<Film>(
+                    "kinopoiskId == $0", kinopoiskId
+                ).find().firstOrNull()
 
-                val out = realm.write {
-                    delete(inFilm)
+                if (film != null) {
+                    realm.write {
+                        findLatest(film)?.also {
+                            delete(it)
+                        }
+                    }
+
+                    Result.success(Unit)
+                } else {
+                    Result.failure(NotFoundException())
                 }
-
-                Result.success(out)
             } catch (ex: Exception) {
                 Result.failure(ex)
             }
@@ -95,9 +103,8 @@ internal interface LocalFavoriteDataSource {
             TODO("Not yet implemented")
         }
 
-        override suspend fun delete(film: FavoriteFilm): Result<Unit> {
+        override suspend fun delete(kinopoiskId: Int): Result<Unit> {
             TODO("Not yet implemented")
         }
-
     }
 }
