@@ -8,6 +8,6 @@ import ru.kpfu.itis.feature.search.api.SearchFilmRepository
 internal class GetFilmsByQueryUseCaseImpl(
     private val repository: SearchFilmRepository,
 ) : GetFilmsByQueryUseCase {
-    override suspend fun invoke(query: String): Flow<List<Film>> =
+    override suspend fun invoke(query: String): Flow<List<Film>?> =
         repository.getFilmByQuery(query)
 }

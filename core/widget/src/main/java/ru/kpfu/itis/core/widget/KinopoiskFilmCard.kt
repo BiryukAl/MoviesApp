@@ -29,7 +29,6 @@ import ru.kpfu.itis.core.widget.model.FilmBrief
 @Composable
 fun KinopoiskFilmCard(
     modifier: Modifier = Modifier,
-    isFavorite: Boolean,
     filmBrief: FilmBrief,
     onClick: () -> Unit,
     onPress: () -> Unit
@@ -66,7 +65,7 @@ fun KinopoiskFilmCard(
             ) {
                 KinopoiskCardTitle(
                     text = filmBrief.nameRu,
-                    isFavorite = isFavorite
+                    isFavorite = filmBrief.isFavorite
                 )
                 KinopoiskCardSupportingText(
                     genre = filmBrief.genre,

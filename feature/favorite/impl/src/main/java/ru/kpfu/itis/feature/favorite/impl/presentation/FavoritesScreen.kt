@@ -168,11 +168,9 @@ private fun FavoriteFilms(
         ) { filmBrief ->
             KinopoiskFilmCard(
                 modifier = Modifier.animateItemPlacement(),
-                isFavorite = true,
                 filmBrief = filmBrief,
-                onClick = { onClick(filmBrief.filmId) },
-                onPress = { onPress(filmBrief) }
-            )
+                onClick = { onClick(filmBrief.filmId) }
+            ) { onPress(filmBrief) }
         }
     }
 }

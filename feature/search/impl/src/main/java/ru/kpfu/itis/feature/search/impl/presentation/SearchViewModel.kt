@@ -33,7 +33,7 @@ import ru.kpfu.itis.feature.search.api.GetFilmsByQueryUseCase
 import timber.log.Timber
 import java.net.UnknownHostException
 
-class SearchViewModel(
+internal class SearchViewModel(
     private val getFilmsByQueryUseCase: GetFilmsByQueryUseCase,
 ) : ScreenModel {
 
@@ -48,7 +48,7 @@ class SearchViewModel(
 
     private suspend fun searchFromRemoteSource(
         query: String
-    ): StateFlow<List<FilmBrief>> = getFilmsByQueryUseCase(query = query)
+    ): StateFlow<List<FilmBrief>> = getFilmsByQueryUseCase(query)
         .flowOn(Dispatchers.IO)
         .onStart {
             _screenState.emit(
@@ -64,8 +64,7 @@ class SearchViewModel(
                     isLoading = false
                 )
             )
-        }
-        .catch {
+        }.catch {
             when (it) {
                 is UnknownHostException -> _screenState.emit(
                     _screenState.value.copy(
@@ -80,9 +79,11 @@ class SearchViewModel(
                 )
             }
             Timber.d(it, "Search from Flow")
-        }
-        .map { films ->
+        }.map {
+            if (it.isNullOrEmpty()) listOf() else it
+        }.map { films ->
             films.map {
+                Timber.d("searchFromRemoteSource: film: $it")
                 FilmBrief(
                     filmId = it.id,
                     nameRu = it.name ?: "",

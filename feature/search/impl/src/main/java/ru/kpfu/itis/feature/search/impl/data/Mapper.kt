@@ -9,7 +9,7 @@ internal class Mapper {
             id = checkNotNull(response.filmId),
             response.nameRu,
             preview = response.posterUrlPreview,
-            genre = response.genres?.first()?.genre.toString(),
+            genre = response.genres?.first()?.genre ?: "",
             year = response.year
         )
     }

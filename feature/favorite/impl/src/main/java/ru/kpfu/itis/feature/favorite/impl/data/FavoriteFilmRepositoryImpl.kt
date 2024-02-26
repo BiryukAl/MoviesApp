@@ -10,7 +10,6 @@ internal class FavoriteFilmRepositoryImpl(
     private val local: LocalFavoriteDataSource,
     private val remote: RemoteFilmDataSource,
     private val mappers: Mappers,
-
     ) : FavoriteFilmRepository {
     override fun getAllFavorite(): Flow<Result<List<FavoriteFilm>>> {
         return local.getAllFavorite().map {
@@ -24,7 +23,6 @@ internal class FavoriteFilmRepositoryImpl(
 
     override fun getById(id: Int): Result<FavoriteFilm> =
         local.getById(id).flatMap(mappers::entityToModel)
-
 
     override suspend fun addFilm(id: Int): Flow<Unit> = flow {
         remote.getFilmById(id)

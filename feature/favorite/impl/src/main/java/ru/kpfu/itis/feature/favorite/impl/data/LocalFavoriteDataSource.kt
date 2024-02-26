@@ -34,13 +34,13 @@ internal interface LocalFavoriteDataSource {
 
         override fun getById(kinopoiskId: Int): Result<Film> {
             return try {
+
                 val film = realm.query<Film>(
                     "kinopoiskId == $0", kinopoiskId
                 ).find().firstOrNull()
 
                 return if (film != null) Result.success(film)
                 else Result.failure(RealmException())
-
             } catch (ex: Exception) {
                 Result.failure(ex)
             }
@@ -49,14 +49,16 @@ internal interface LocalFavoriteDataSource {
 
         override suspend fun addFilm(film: FavoriteFilm): Result<Film> {
             return try {
-                mapper.modelToEntity(film).map {
-                    realm.write {
-                        copyToRealm(
-                            it,
-                            updatePolicy = UpdatePolicy.ALL
-                        )
-                    }
+                val inFilm = mapper.modelToEntity(film).getOrThrow()
+
+                val outFilm = realm.write {
+                    copyToRealm(
+                        inFilm,
+                        updatePolicy = UpdatePolicy.ALL
+                    )
                 }
+
+                Result.success(outFilm)
             } catch (ex: Exception) {
                 Result.failure(ex)
             }
@@ -64,18 +66,20 @@ internal interface LocalFavoriteDataSource {
 
         override suspend fun delete(film: FavoriteFilm): Result<Unit> {
             return try {
-                mapper.modelToEntity(film).map {
-                    realm.write {
-                        delete(it)
-                    }
+                val inFilm = mapper.modelToEntity(film).getOrThrow()
+
+                val out = realm.write {
+                    delete(inFilm)
                 }
+
+                Result.success(out)
             } catch (ex: Exception) {
                 Result.failure(ex)
             }
         }
     }
 
-    class Test(): LocalFavoriteDataSource{
+    class Test() : LocalFavoriteDataSource {
 
         val db = listOf<Film>()
 

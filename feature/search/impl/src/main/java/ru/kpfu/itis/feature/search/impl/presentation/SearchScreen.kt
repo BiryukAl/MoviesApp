@@ -44,7 +44,7 @@ import ru.kpfu.itis.feature.search.impl.R
 import timber.log.Timber
 
 
-class SearchScreen : Screen {
+internal class SearchScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel = getScreenModel<SearchViewModel>()
@@ -201,11 +201,9 @@ class SearchScreen : Screen {
                 contentType = { "SearchResult" }
             ) { filmBrief ->
                 KinopoiskFilmCard(
-                    isFavorite = false,
                     filmBrief = filmBrief,
-                    onClick = { onClick(filmBrief.filmId) },
-                    onPress = {}
-                )
+                    onClick = { onClick(filmBrief.filmId) }
+                ) {}
             }
         }
     }

@@ -25,7 +25,7 @@ import ru.kpfu.itis.feature.popular.api.GetPopularFilmsUseCase
 import timber.log.Timber
 import java.net.UnknownHostException
 
-class PopularViewModel(
+internal class PopularViewModel(
     private val getPopularFilmsUseCase: GetPopularFilmsUseCase,
     private val addFavoriteFilmUseCase: AddFavoriteFilmUseCase,
 ) : ScreenModel {
@@ -112,7 +112,6 @@ class PopularViewModel(
                 }
                 Timber.d(it, "Popular Screen from Flow")
             }.collect {
-
                 _screenState.emit(
                     _screenState.value.copy(
                         popularFilms = it.map { film ->
@@ -179,7 +178,7 @@ class PopularViewModel(
                         message = "Ошибка"
                     )
                 )
-                Timber.d(it, "Ошибка добавления в избранное from Flow")
+                Timber.e(it, "Ошибка добавления в избранное from Flow")
             }
             .collect {
                 _screenAction.emit(

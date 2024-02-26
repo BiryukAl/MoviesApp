@@ -17,12 +17,12 @@ import ru.kpfu.itis.feature.search.impl.searchModule
 import ru.kpfu.itis.feature.search.impl.searchModuleScreen
 import timber.log.Timber
 
-class App: Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        Timber.plant()
+        Timber.plant(Timber.DebugTree())
 
         startKoin {
             androidLogger()

@@ -40,7 +40,7 @@ import ru.kpfu.itis.core.widget.KinopoiskSnackbar
 import ru.kpfu.itis.core.widget.KinopoiskTopBar
 import ru.kpfu.itis.core.widget.model.FilmBrief
 
-class PopularScreen : Screen {
+internal class PopularScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel = getScreenModel<PopularViewModel>()
@@ -88,9 +88,9 @@ class PopularScreen : Screen {
         ) { contentPadding ->
             when (screenState.isLoading) {
                 true -> KinopoiskProgressBar(shouldShow = true)
-                false -> Top100FilmsList(
+                false -> TopFilmsList(
                     contentPadding = contentPadding,
-                    top100Films = screenState.popularFilms,
+                    films = screenState.popularFilms,
                     onClick = {
                         eventHandler(
                             PopularViewModel.PopularScreenEvent.OnFilmCardClick(
@@ -133,9 +133,9 @@ class PopularScreen : Screen {
     }
 
     @Composable
-    private fun Top100FilmsList(
+    private fun TopFilmsList(
         contentPadding: PaddingValues,
-        top100Films: PersistentList<FilmBrief>,
+        films: PersistentList<FilmBrief>,
         onClick: (Int) -> Unit,
         onPress: (FilmBrief) -> Unit
     ) {
@@ -153,16 +153,19 @@ class PopularScreen : Screen {
                 .background(MoviesAppTheme.color.background)
         ) {
             items(
-                items = top100Films,
+                items = films,
                 key = { it.filmId },
-                contentType = { "Top100Films" }
+                contentType = { "Top Films" }
             ) { filmBrief ->
                 KinopoiskFilmCard(
-                    isFavorite = false,
                     filmBrief = filmBrief,
-                    onClick = { onClick(filmBrief.filmId) },
-                    onPress = { onPress(filmBrief) }
-                )
+                    onClick = { onClick(filmBrief.filmId) }
+                ) {
+                    when (filmBrief.isFavorite) {
+                        true -> Unit
+                        false -> onPress(filmBrief)
+                    }
+                }
             }
         }
     }

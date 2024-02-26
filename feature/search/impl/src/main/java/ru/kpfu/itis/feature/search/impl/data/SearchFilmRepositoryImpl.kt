@@ -13,9 +13,11 @@ internal class SearchFilmRepositoryImpl(
     override suspend fun getFilmByQuery(query: String): Flow<List<Film>> = flow {
 
         network.getFilmByQuery(query).map { response: SearchResponse ->
-            val films = response.films.orEmpty().filterNotNull().map { film ->
-                mapper.responseToModel(film).getOrThrow()
-            }
+            val films = response.films.orEmpty()
+                .filterNotNull()
+                .mapNotNull { film ->
+                    mapper.responseToModel(film).getOrNull()
+                }
             emit(films)
         }
     }
