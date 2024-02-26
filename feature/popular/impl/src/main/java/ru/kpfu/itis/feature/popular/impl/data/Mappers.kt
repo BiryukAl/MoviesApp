@@ -3,11 +3,11 @@ package ru.kpfu.itis.feature.popular.impl.data
 import ru.kpfu.itis.feature.popular.api.Film
 
 internal class Mappers {
-    private fun responseToModel(response: FilmsResponse.Film, isFavorite: Boolean): Result<Film> =
+    fun responseToModel(response: FilmsResponse.Film, isFavorite: Boolean): Result<Film> =
         kotlin.runCatching {
             Film(
                 id = response.kinopoiskId!!,
-                name = response.nameEn,
+                name = response.nameRu,
                 preview = response.posterUrlPreview,
                 genre = response.genres?.first()?.genre,
                 year = response.year.toString(),

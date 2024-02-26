@@ -1,6 +1,7 @@
 package ru.kpfu.itis.feature.favorite.impl.data
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilm
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilmRepository
@@ -25,12 +26,13 @@ internal class FavoriteFilmRepositoryImpl(
         local.getById(id).flatMap(mappers::entityToModel)
 
 
-    override suspend fun addFilm(id: Int): Result<Unit> {
-        return remote.getFilmById(id).map { remoteFilm ->
-            mappers.responseToModel(remoteFilm).map {
-                local.addFilm(it)
+    override suspend fun addFilm(id: Int): Flow<Unit> = flow {
+        remote.getFilmById(id)
+            .map { remoteFilm ->
+                mappers.responseToModel(remoteFilm).map {
+                    if (local.addFilm(it).isSuccess) emit(Unit)
+                }.getOrThrow()
             }
-        }
     }
 
     override suspend fun delete(id: Int): Result<Unit> {

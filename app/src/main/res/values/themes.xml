@@ -2,4 +2,11 @@
 <resources>
 
     <style name="Theme.MoviesApp" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.MoviesAppSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_movies_app_svg</item>
+        <item name="windowSplashScreenAnimationDuration">600</item>
+        <item name="postSplashScreenTheme">@style/Theme.MoviesApp</item>
+    </style>
 </resources>

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="genres">Жанры:</string>
-    <string name="countries">Страны:</string>
-    <string name="retry">Повторить</string>
+
+<string name="retry">Повторить</string>
     <string name="no_internet_connection_error">Произошла ошибка при загрузке данных, проверьте подключение к сети</string>
     <string name="other_error">Упс! Что-то пошло не так, повторите попытку</string>
-    <string name="not_found">Не найдено</string>
-    <string name="search">Поиск</string>
     <string name="no_data_in_db">У вас нет избранных фильмов, добавьте их на главном экране</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>

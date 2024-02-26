@@ -10,10 +10,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
     }
-
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -40,6 +37,7 @@ dependencies {
     api(libs.appcompat)
 
     api(libs.material)
+    api(libs.androidx.compose.material)
     api(libs.material3)
 
     api(platform(libs.compose.bom))

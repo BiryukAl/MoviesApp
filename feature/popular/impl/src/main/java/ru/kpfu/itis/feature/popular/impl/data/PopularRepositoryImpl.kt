@@ -1,6 +1,8 @@
 package ru.kpfu.itis.feature.popular.impl.data
 
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import ru.kpfu.itis.core.network.ConnectionError
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilmRepository
 import ru.kpfu.itis.feature.popular.api.Film
@@ -12,17 +14,35 @@ internal class PopularRepositoryImpl(
     private val mapper: Mappers,
 ) : PopularRepository {
 
-    override suspend fun getPopularFilms(page: Int): Result<List<Film>> {
+    override suspend fun getPopularFilms(page: Int): Flow<List<Film>> {
+        return flow<List<Film>> {
 
-        val favoriteFilm = local.getAllFavorite().first().getOrElse { listOf() }
+            val favoriteFilms = local.getAllFavorite().first().getOrElse { listOf() }
 
-        return network.getPopularFilms(page).flatMap {
-
-            if (it.films.isNullOrEmpty()) return Result.failure(ConnectionError())
-
-            mapper.listResponseToModel(
-                it.films,
-                favoriteFilm.map { favoriteFilm -> favoriteFilm.kinopoiskId })
+            network.getPopularFilms(page).fold(
+                onSuccess = { response ->
+                    val films = response.films
+                    if (films.isNullOrEmpty())
+                        throw ConnectionError()
+                    else {
+                        emit(
+                            mapper.listResponseToModel(
+                                films,
+                                favoriteFilms.map { favoriteFilm -> favoriteFilm.kinopoiskId }
+                            ).getOrElse { listOf() }
+                        )
+                    }
+                },
+                onFailure = {
+                    throw it
+                }
+            )
         }
+    }
+}
+
+internal class PopularRepositoryTest : PopularRepository {
+    override suspend fun getPopularFilms(page: Int): Flow<List<Film>> {
+        TODO("Not yet implemented")
     }
 }

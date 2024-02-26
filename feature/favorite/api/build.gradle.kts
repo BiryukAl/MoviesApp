@@ -6,12 +6,11 @@ plugins {
 
 android {
     namespace = "ru.kpfu.itis.feature.favorite.api"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 26
+        minSdk = libs.versions.minSdk.get().toInt()
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -22,7 +21,6 @@ android {
 }
 
 dependencies {
-
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

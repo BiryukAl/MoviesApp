@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
     }
-
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -20,7 +18,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
     buildFeatures {
         compose = true
     }
@@ -32,7 +29,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
 }
 
 dependencies {
@@ -47,5 +43,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
 }

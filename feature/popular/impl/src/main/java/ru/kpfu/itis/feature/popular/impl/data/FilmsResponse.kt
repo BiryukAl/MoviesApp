@@ -1,8 +1,8 @@
 package ru.kpfu.itis.feature.popular.impl.data
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 
 @Serializable
 internal data class FilmsResponse(
@@ -19,8 +19,6 @@ internal data class FilmsResponse(
         val countries: List<Country?>?,
         @SerialName("genres")
         val genres: List<Genre?>?,
-        @SerialName("imdbId")
-        val imdbId: String?,
         @SerialName("kinopoiskId")
         val kinopoiskId: Int?,
         @SerialName("nameEn")
@@ -33,12 +31,6 @@ internal data class FilmsResponse(
         val posterUrl: String?,
         @SerialName("posterUrlPreview")
         val posterUrlPreview: String?,
-        @SerialName("ratingImdb")
-        val ratingImdb: Double?,
-        @SerialName("ratingKinopoisk")
-        val ratingKinopoisk: Double?,
-        @SerialName("type")
-        val type: String?,
         @SerialName("year")
         val year: Int?
     ) {

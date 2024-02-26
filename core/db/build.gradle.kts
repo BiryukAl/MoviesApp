@@ -14,9 +14,6 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         buildConfigField("Long", "VERSION_DB", "1L")
     }
-
-
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -43,6 +40,7 @@ dependencies {
 
     implementation(libs.corutines.core)
 
+    implementation(libs.tiimber)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.compose.ui.test.junit4)

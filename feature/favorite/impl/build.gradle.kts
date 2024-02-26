@@ -13,7 +13,6 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -21,19 +20,37 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
     implementation(project(":core:db"))
     implementation(project(":core:network"))
+    implementation(project(":core:widget"))
+    implementation(project(":core:navigation"))
+
     implementation(project(":feature:favorite:api"))
 
     implementation(libs.koin.android)
     implementation(libs.koin.android.compose)
 
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.kotlinx.collections.immutable)
+
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
-    implementation(libs.material)
+
+    implementation(libs.tiimber)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

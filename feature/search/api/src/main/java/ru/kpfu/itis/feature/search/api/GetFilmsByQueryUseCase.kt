@@ -1,5 +1,8 @@
 package ru.kpfu.itis.feature.search.api
 
+import kotlinx.coroutines.flow.Flow
+
 interface GetFilmsByQueryUseCase {
-    suspend fun getfilmsByQuery(query: String): Result<List<Film>>
+    suspend operator fun invoke(query: String): Flow<List<Film>>
+
 }

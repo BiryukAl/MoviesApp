@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:widget"))
+    implementation(project(":core:navigation"))
 
     implementation(project(":feature:details:impl"))
     implementation(project(":feature:favorite:impl"))
@@ -65,6 +66,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.koin.android)
     implementation(libs.koin.android.compose)
