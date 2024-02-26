@@ -35,10 +35,7 @@ fun KinopoiskBottomNavigationItem(
             modifier = Modifier.padding(end = 10.dp),
             imageVector = icon,
             contentDescription = null,
-            tint = when (isSelected) {
-                true -> MoviesAppTheme.color.secondary
-                false -> MoviesAppTheme.color.primary
-            }
+            tint = contentColor
         )
         Text(
             text = text,
