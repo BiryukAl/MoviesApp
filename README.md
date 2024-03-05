@@ -40,20 +40,27 @@ Option:
 [-] 7. Ответы от API должны быть закешированы хотя бы на время сессии.
 
 [-] 8. Приложение покрыто UNIT тестами.
-   
+
 ## Result:
 
-  Photo
-  
+| Screeen Popolar                      | Screeen Popolar Dark                    | Screeen Favorite                      | Screeen Details                      |
+|--------------------------------------|-----------------------------------------|---------------------------------------|--------------------------------------|
+| ![Photo](/README/screen_popular.png) | ![Photo](/README/screen_dark_theme.png) | ![Photo](/README/screen_favorite.png) | ![Photo](/README/screen_details.png) |
+
+| Screen Search                       | Screen Not Found                              | Screen Error Network               | Screen Alert Add Film              |
+|-------------------------------------|-----------------------------------------------|------------------------------------|------------------------------------|
+| ![Photo](/README/screen_search.png) | ![Photo](/README/screen_search_not_found.png) | ![Photo](/README/screen_error.png) | ![Photo](/README/screen_alert.png) |
+
 ## Description:
 
-### 1) Design: 
+### 1) Design:
 
 ![Figma Design All Version Photo](/README/design.png)
 [Figma Link](https://www.figma.com/file/DqAfJbnm1vJNUOtU9iE1Sb/Fintech2023-(Copy)?type=design&node-id=0%3A1&mode=design&t=8DWdMiAxqzZe2RSt-1)
 
 ### 2) Modules:
-  - app
+
+- app
   - core
     - db 
     - designsystem
