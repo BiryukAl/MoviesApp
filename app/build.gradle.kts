@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:widget"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:util"))
 
     implementation(project(":feature:details:impl"))
     implementation(project(":feature:favorite:impl"))

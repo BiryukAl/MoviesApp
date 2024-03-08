@@ -50,7 +50,8 @@ val favoriteModule = module {
     factory<FavoritesViewModel> {
         FavoritesViewModel(
             deleteFavoriteFilmUseCase = get(),
-            getAllFavoriteFilmUseCase = get()
+            getAllFavoriteFilmUseCase = get(),
+            appDispatchers = get(),
         )
     }
 }

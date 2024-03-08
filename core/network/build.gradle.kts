@@ -45,7 +45,7 @@ dependencies {
 
     implementation(libs.koin.android)
 
-    implementation(libs.corutines.core)
+    implementation(libs.kotlinx.coroutines.core)
 
     implementation(libs.tiimber)
     testImplementation(libs.junit)

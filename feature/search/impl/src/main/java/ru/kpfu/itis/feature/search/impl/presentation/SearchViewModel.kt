@@ -5,7 +5,6 @@ import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +26,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import ru.kpfu.itis.core.util.AppDispatchers
 import ru.kpfu.itis.core.widget.model.ErrorType
 import ru.kpfu.itis.core.widget.model.FilmBrief
 import ru.kpfu.itis.feature.search.api.GetFilmsByQueryUseCase
@@ -35,6 +35,7 @@ import java.net.UnknownHostException
 
 internal class SearchViewModel(
     private val getFilmsByQueryUseCase: GetFilmsByQueryUseCase,
+    private val appDispatchers: AppDispatchers,
 ) : ScreenModel {
 
     private val _screenState = MutableStateFlow(SearchScreenState())
@@ -49,7 +50,7 @@ internal class SearchViewModel(
     private suspend fun searchFromRemoteSource(
         query: String
     ): StateFlow<List<FilmBrief>> = getFilmsByQueryUseCase(query)
-        .flowOn(Dispatchers.IO)
+        .flowOn(appDispatchers.io)
         .onStart {
             _screenState.emit(
                 _screenState.value.copy(

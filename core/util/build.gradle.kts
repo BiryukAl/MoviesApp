@@ -2,18 +2,17 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-//    id("com.google.devtools.ksp")
-    alias(libs.plugins.realm)
 }
 
 android {
-    namespace = "ru.kpfu.itis.core.db"
+    namespace = "ru.kpfu.itis.core.util"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        buildConfigField("Long", "VERSION_DB", "1L")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -21,28 +20,20 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures{
-        buildConfig = true
-    }
 }
 
 dependencies {
 
-//    implementation(libs.room)
-//    implementation(libs.room.kotlin)
-//    ksp(libs.room.compiler)
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
 
-    api(libs.realm)
-//    implementation(libs.realm.sync)
-    implementation(libs.realm.coroutines)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.koin.android)
 
-    implementation(libs.kotlinx.coroutines.core)
 
-    implementation(libs.tiimber)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.compose.ui.test.junit4)
-
+    androidTestImplementation(libs.espresso.core)
 }

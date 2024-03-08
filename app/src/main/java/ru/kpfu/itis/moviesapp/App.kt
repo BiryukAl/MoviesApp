@@ -7,6 +7,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import ru.kpfu.itis.core.db.dbModule
 import ru.kpfu.itis.core.network.networkModule
+import ru.kpfu.itis.core.util.utilModule
 import ru.kpfu.itis.feature.details.impl.detailModule
 import ru.kpfu.itis.feature.details.impl.detailModuleScreen
 import ru.kpfu.itis.feature.favorite.impl.favoriteModule
@@ -34,7 +35,8 @@ class App : Application() {
                 detailModule,
                 favoriteModule,
                 popularModule,
-                searchModule
+                searchModule,
+                utilModule,
             )
         }
 

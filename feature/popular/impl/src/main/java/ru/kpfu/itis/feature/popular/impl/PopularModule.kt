@@ -28,7 +28,8 @@ val popularModule = module {
     factory<PopularViewModel> {
         PopularViewModel(
             getPopularFilmsUseCase = get(),
-            addFavoriteFilmUseCase = get()
+            addFavoriteFilmUseCase = get(),
+            appDispatchers = get(),
         )
     }
 }

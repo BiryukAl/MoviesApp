@@ -6,7 +6,6 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -18,6 +17,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import ru.kpfu.itis.core.util.AppDispatchers
 import ru.kpfu.itis.core.widget.model.ErrorType
 import ru.kpfu.itis.core.widget.model.FilmBrief
 import ru.kpfu.itis.feature.favorite.api.useCase.AddFavoriteFilmUseCase
@@ -28,6 +28,7 @@ import java.net.UnknownHostException
 internal class PopularViewModel(
     private val getPopularFilmsUseCase: GetPopularFilmsUseCase,
     private val addFavoriteFilmUseCase: AddFavoriteFilmUseCase,
+    private val appDispatchers: AppDispatchers,
 ) : ScreenModel {
 
     private val _screenState = MutableStateFlow(PopularScreenState())
@@ -82,7 +83,7 @@ internal class PopularViewModel(
 
     private fun getPopularFilms() = screenModelScope.launch {
 
-        getPopularFilmsUseCase().flowOn(Dispatchers.IO)
+        getPopularFilmsUseCase().flowOn(appDispatchers.io)
             .onStart {
                 _screenState.emit(
                     _screenState.value.copy(
@@ -164,7 +165,7 @@ internal class PopularViewModel(
     }
 
     private fun onConfirmDialog(filmBrief: FilmBrief) = screenModelScope.launch {
-        addFavoriteFilmUseCase(filmBrief.filmId).flowOn(Dispatchers.IO)
+        addFavoriteFilmUseCase(filmBrief.filmId).flowOn(appDispatchers.io)
             .onStart {
                 _screenState.emit(
                     _screenState.value.copy(

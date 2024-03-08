@@ -4,7 +4,6 @@ package ru.kpfu.itis.feature.details.impl.presentation
 import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import ru.kpfu.itis.core.util.AppDispatchers
 import ru.kpfu.itis.core.widget.model.ErrorType
 import ru.kpfu.itis.feature.details.api.FilmDetail
 import ru.kpfu.itis.feature.details.api.GetFilmDetailsUseCase
@@ -25,6 +25,7 @@ import java.net.UnknownHostException
 internal class DetailsViewModel(
     private val filmId: Int,
     private val getFilmDetailsUseCase: GetFilmDetailsUseCase,
+    private val appDispatchers: AppDispatchers,
 ) : ScreenModel {
 
     private val _screenState = MutableStateFlow(DetailsScreenState())
@@ -65,7 +66,7 @@ internal class DetailsViewModel(
     }
 
     private fun getFilmDetail(filmId: Int) = screenModelScope.launch {
-        getFilmDetailsUseCase(id = filmId).flowOn(Dispatchers.IO)
+        getFilmDetailsUseCase(id = filmId).flowOn(appDispatchers.io)
             .onStart {
                 _screenState.emit(
                     _screenState.value.copy(

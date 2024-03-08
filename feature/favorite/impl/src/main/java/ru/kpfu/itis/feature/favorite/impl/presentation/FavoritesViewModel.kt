@@ -6,7 +6,6 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import ru.kpfu.itis.core.util.AppDispatchers
 import ru.kpfu.itis.core.widget.model.ErrorType
 import ru.kpfu.itis.core.widget.model.FilmBrief
 import ru.kpfu.itis.feature.favorite.api.FavoriteFilm
@@ -26,6 +26,7 @@ import timber.log.Timber
 internal class FavoritesViewModel(
     private val deleteFavoriteFilmUseCase: DeleteFavoriteFilmUseCase,
     private val getAllFavoriteFilmUseCase: GetAllFavoriteFilmUseCase,
+    private val appDispatchers: AppDispatchers,
 ) : ScreenModel {
 
 
@@ -81,7 +82,7 @@ internal class FavoritesViewModel(
 
     private fun getAllFavoriteFilms() = screenModelScope.launch {
         getAllFavoriteFilmUseCase()
-            .flowOn(Dispatchers.IO)
+            .flowOn(appDispatchers.io)
             .catch {
                 _screenState.emit(
                     _screenState.value.copy(

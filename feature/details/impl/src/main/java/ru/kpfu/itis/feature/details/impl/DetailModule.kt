@@ -33,7 +33,8 @@ val detailModule = module {
     factory<DetailsViewModel> {
         DetailsViewModel(
             filmId = getProperty(FILM_ID_KOIN_PROPERTY),
-            getFilmDetailsUseCase = get()
+            getFilmDetailsUseCase = get(),
+            appDispatchers = get(),
         )
     }
 

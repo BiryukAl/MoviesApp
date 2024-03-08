@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core:db"))
     implementation(project(":core:navigation"))
     implementation(project(":core:widget"))
+    implementation(project(":core:util"))
 
     implementation(project(":feature:details:api"))
     implementation(project(":feature:favorite:api"))

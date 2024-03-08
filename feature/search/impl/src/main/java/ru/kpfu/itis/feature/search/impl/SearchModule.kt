@@ -28,7 +28,10 @@ val searchModule = module {
     }
     //Presentation
     factory<SearchViewModel> {
-        SearchViewModel(getFilmsByQueryUseCase = get())
+        SearchViewModel(
+            getFilmsByQueryUseCase = get(),
+            appDispatchers = get()
+        )
     }
 }
 

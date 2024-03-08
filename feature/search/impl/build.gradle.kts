@@ -36,6 +36,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:navigation"))
     implementation(project(":core:widget"))
+    implementation(project(":core:util"))
 
     implementation(project(":feature:search:api"))
 
