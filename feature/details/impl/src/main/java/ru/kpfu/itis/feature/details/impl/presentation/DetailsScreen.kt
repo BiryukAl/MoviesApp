@@ -98,45 +98,44 @@ private fun FilmDetails(
     filmDetails: FilmDetail?,
     onArrowBackClick: () -> Unit
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(
-            bottom = 56.dp
-        ),
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MoviesAppTheme.color.background)
-            .padding(contentPadding)
-    ) {
-        item {
-            FilmPoster(
-                imageUrl = filmDetails?.imageUrl,
-                onArrowBackClick = onArrowBackClick
-            )
-        }
-        item {
-            FilmInformation(filmDetails = filmDetails)
-        }
-    }
-}
-
-@Composable
-private fun FilmPoster(
-    imageUrl: String?,
-    onArrowBackClick: () -> Unit
-) {
     Box {
-        imageUrl?.let {
-            KinopoiskImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(533.dp),
-                imageUrl = imageUrl
-            )
+        LazyColumn(
+            contentPadding = PaddingValues(
+                bottom = 56.dp
+            ),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MoviesAppTheme.color.background)
+                .padding(contentPadding)
+        ) {
+            item {
+                FilmPoster(
+                    imageUrl = filmDetails?.imageUrl
+                )
+            }
+            item {
+                FilmInformation(filmDetails = filmDetails)
+            }
         }
         KinopoiskIconButton(
             modifier = Modifier.align(Alignment.TopStart),
             icon = MoviesAppIcons.ArrowBack,
             action = onArrowBackClick
+        )
+    }
+
+}
+
+@Composable
+private fun FilmPoster(
+    imageUrl: String?
+) {
+    imageUrl?.let {
+        KinopoiskImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(533.dp),
+            imageUrl = imageUrl
         )
     }
 }
