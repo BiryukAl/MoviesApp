@@ -1,10 +1,7 @@
 package ru.kpfu.itis.feature.details.impl.data
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.http.isSuccess
-import ru.kpfu.itis.core.network.ConnectionError
+import ru.kpfu.itis.core.network.getResult
 
 
 internal interface RemoteDetailsDataSouse {
@@ -13,24 +10,8 @@ internal interface RemoteDetailsDataSouse {
     class Base(
         private val client: HttpClient
     ) : RemoteDetailsDataSouse {
-        override suspend fun getFilmById(kinopoiskId: Int): Result<FilmResponse> {
-            val response = client.get("films/$kinopoiskId")
-            return if (response.status.isSuccess()) {
-                try {
-                    Result.success(response.body<FilmResponse>())
-                } catch (ex: Exception) {
-                    Result.failure(ex)
-                }
-            } else {
-                Result.failure(ConnectionError())
-            }
-        }
-    }
-
-    class Test() : RemoteDetailsDataSouse {
-        override suspend fun getFilmById(kinopoiskId: Int): Result<FilmResponse> {
-            TODO("Not yet implemented")
-        }
+        override suspend fun getFilmById(kinopoiskId: Int): Result<FilmResponse> =
+            client.getResult("films/$kinopoiskId")
     }
 
 }

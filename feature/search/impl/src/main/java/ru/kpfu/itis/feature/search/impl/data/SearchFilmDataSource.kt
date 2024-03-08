@@ -1,10 +1,8 @@
 package ru.kpfu.itis.feature.search.impl.data
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.http.isSuccess
-import ru.kpfu.itis.core.network.ConnectionError
+import io.ktor.http.HttpMethod
+import ru.kpfu.itis.core.network.getResult
 
 internal interface SearchFilmDataSource {
 
@@ -15,28 +13,15 @@ internal interface SearchFilmDataSource {
     ) : SearchFilmDataSource {
 
         override suspend fun getFilmByQuery(query: String): Result<SearchResponse> {
-            val response = client.get("/api/v2.1/films/search-by-keyword") {
+            return client.getResult("/api/v2.1/films/search-by-keyword") {
+                method = HttpMethod.Delete
                 url {
-                    parameters.append("keyword", query)
-                    parameters.append("page", "1")
+                    url {
+                        parameters.append("keyword", query)
+                        parameters.append("page", "1")
+                    }
                 }
             }
-
-            return if (response.status.isSuccess()) {
-                try {
-                    Result.success(response.body<SearchResponse>())
-                } catch (ex: Exception) {
-                    Result.failure(ex)
-                }
-            } else {
-                Result.failure(ConnectionError())
-            }
-        }
-    }
-
-    class  Test(): SearchFilmDataSource {
-        override suspend fun getFilmByQuery(query: String): Result<SearchResponse> {
-            TODO("Not yet implemented")
         }
     }
 
