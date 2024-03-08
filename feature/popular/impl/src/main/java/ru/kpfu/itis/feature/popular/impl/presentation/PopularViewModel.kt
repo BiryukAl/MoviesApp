@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.core.util.AppDispatchers
@@ -91,22 +90,18 @@ internal class PopularViewModel(
                     )
                 )
             }
-            .onCompletion {
-                _screenState.emit(
-                    _screenState.value.copy(
-                        isLoading = false
-                    )
-                )
-            }.catch {
+            .catch {
                 when (it) {
                     is UnknownHostException -> _screenState.emit(
                         _screenState.value.copy(
-                            error = ErrorType.UNKNOWN_HOST_EXCEPTION
+                            isLoading = false,
+                            error = ErrorType.UNKNOWN_HOST_EXCEPTION,
                         )
                     )
 
                     else -> _screenState.emit(
                         _screenState.value.copy(
+                            isLoading = false,
                             error = ErrorType.OTHER
                         )
                     )
@@ -115,6 +110,7 @@ internal class PopularViewModel(
             }.collect {
                 _screenState.emit(
                     _screenState.value.copy(
+                        isLoading = false,
                         popularFilms = it.map { film ->
                             FilmBrief(
                                 filmId = film.id,
