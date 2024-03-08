@@ -1,11 +1,11 @@
 package ru.kpfu.itis.feature.search.impl.presentation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -126,7 +126,9 @@ internal class SearchScreen : Screen {
         onSearchResultClick: (Int) -> Unit
     ) {
         SearchBar(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .background(MoviesAppTheme.color.background)
+                .fillMaxSize(),
             query = searchInput,
             onQueryChange = onQueryChange,
             onSearch = onSearch,
@@ -147,7 +149,7 @@ internal class SearchScreen : Screen {
             },
             colors = SearchBarDefaults.colors(
                 containerColor = MoviesAppTheme.color.background,
-                dividerColor = MoviesAppTheme.color.background
+                dividerColor = MoviesAppTheme.color.background,
             )
         ) {
             if (isLoading) {

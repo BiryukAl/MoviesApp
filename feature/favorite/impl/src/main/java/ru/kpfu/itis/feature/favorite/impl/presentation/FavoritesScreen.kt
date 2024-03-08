@@ -91,7 +91,8 @@ private fun FavoritesScreenContent(
                 title = stringResource(id = R.string.favorite),
                 onClick = { eventHandler(FavoritesViewModel.FavoritesScreenEvent.OnSearchIconClick) }
             )
-        }
+        },
+        containerColor = MoviesAppTheme.color.background,
     ) { contentPadding ->
         when (screenState.isLoading) {
             true -> KinopoiskProgressBar(shouldShow = true)

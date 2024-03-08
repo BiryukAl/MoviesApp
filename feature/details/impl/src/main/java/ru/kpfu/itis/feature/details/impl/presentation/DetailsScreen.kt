@@ -1,5 +1,6 @@
 package ru.kpfu.itis.feature.details.impl.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -63,14 +64,22 @@ private fun DetailsScreenContent(
     screenState: DetailsViewModel.DetailsScreenState,
     eventHandler: (DetailsViewModel.DetailsScreenEvent) -> Unit
 ) {
-    Scaffold { contentPadding ->
+    Scaffold(
+        modifier = Modifier
+            .background(MoviesAppTheme.color.background)
+    ) { contentPadding ->
         when (screenState.isLoading) {
             true -> KinopoiskProgressBar(shouldShow = true)
             false -> {
                 FilmDetails(
                     contentPadding = contentPadding,
                     filmDetails = screenState.filmDetails,
-                    onArrowBackClick = { eventHandler(DetailsViewModel.DetailsScreenEvent.OnArrowBackClick) }
+                    onArrowBackClick = {
+                        eventHandler(
+                            DetailsViewModel.DetailsScreenEvent
+                                .OnArrowBackClick
+                        )
+                    }
                 )
             }
         }
@@ -95,6 +104,7 @@ private fun FilmDetails(
         ),
         modifier = Modifier
             .fillMaxSize()
+            .background(MoviesAppTheme.color.background)
             .padding(contentPadding)
     ) {
         item {
