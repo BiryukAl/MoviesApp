@@ -2,7 +2,7 @@
 
 Do: Бирюков Aлександр
 
-Contact: [Telegram](https://t.me/SanyaLn), [HH.ru](https://kazan.hh.ru/resume/c458e78eff0c0dd3760039ed1f7047504d6247)
+Contact: [Telegram](https://t.me/SanyaLn) 
 
 ## Test task:
 Main:
